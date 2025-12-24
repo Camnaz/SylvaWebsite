@@ -818,16 +818,18 @@ function initDarkModeTransitions() {
 function initHighlightEffects() {
   // Group elements by their parent section for staggered reveals
   const sections = document.querySelectorAll('.section');
+  const isMobile = window.innerWidth <= 768;
   
   sections.forEach(section => {
     const cards = section.querySelectorAll('.feature-card, .difference-item, .economy-feature, .pillar');
     const highlights = section.querySelectorAll('.highlight');
     
-    // Set initial state for cards
+    // Set initial state for cards - use will-change for better performance
     cards.forEach((card, index) => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(30px)';
       card.style.transition = 'none';
+      card.style.willChange = 'opacity, transform';
     });
     
     // Observer for staggered card reveals
@@ -838,21 +840,26 @@ function initHighlightEffects() {
           const cards = Array.from(card.parentElement.querySelectorAll('.feature-card, .difference-item, .economy-feature, .pillar'));
           const index = cards.indexOf(card);
           
-          // Stagger delay based on position
-          const delay = index * 0.1;
+          // Reduce stagger delay on mobile for smoother experience
+          const delay = isMobile ? index * 0.05 : index * 0.1;
           
           setTimeout(() => {
             card.style.transition = 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)';
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
+            
+            // Remove will-change after animation completes
+            setTimeout(() => {
+              card.style.willChange = 'auto';
+            }, 700);
           }, delay * 1000);
           
           cardObserver.unobserve(card);
         }
       });
     }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -80px 0px'
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -40px 0px' : '0px 0px -80px 0px'
     });
     
     cards.forEach(card => cardObserver.observe(card));
