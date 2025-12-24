@@ -79,26 +79,27 @@ function initHeroFade() {
   if (!hero || !header) return;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  const isMobile = window.innerWidth <= 768;
+  
+  // Disable hero fade on mobile to prevent stuttering
+  if (prefersReducedMotion || isMobile) return;
 
   let ticking = false;
 
   function updateHeroFade() {
     const scrollY = window.scrollY;
     const headerHeight = header.offsetHeight;
-    const isMobile = window.innerWidth <= 768;
     
-    // Mobile-friendly fade ranges - longer, smoother transitions
-    const fadeStart = isMobile ? 30 : 50;
-    const fadeEnd = isMobile ? headerHeight * 0.9 : headerHeight * 0.8;
+    const fadeStart = 50;
+    const fadeEnd = headerHeight * 0.8;
     const fadeProgress = Math.max(0, Math.min(1, (scrollY - fadeStart) / (fadeEnd - fadeStart)));
     
     // Extra smooth easing - quintic ease out
     const easedFade = 1 - Math.pow(1 - fadeProgress, 3);
     
-    // Apply gradual fade and subtle upward movement - less aggressive on mobile
-    const translateAmount = isMobile ? 30 : 40;
-    const scaleAmount = isMobile ? 0.01 : 0.02;
+    // Apply gradual fade and subtle upward movement
+    const translateAmount = 40;
+    const scaleAmount = 0.02;
     hero.style.opacity = 1 - easedFade;
     hero.style.transform = `translateY(${-easedFade * translateAmount}px) scale(${1 - easedFade * scaleAmount})`;
     
@@ -556,7 +557,10 @@ function initFloatingOrbs() {
  */
 function initOrbParallax() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  const isMobile = window.innerWidth <= 768;
+  
+  // Disable orb parallax on mobile to improve performance
+  if (prefersReducedMotion || isMobile) return;
 
   const whatIsSection = document.getElementById('what-is');
   const orbs = document.querySelectorAll('.floating-orb');
@@ -752,6 +756,7 @@ function initLifecyclePanel() {
  */
 function initDarkModeTransitions() {
   const sections = document.querySelectorAll('.section');
+  const isMobile = window.innerWidth <= 768;
   let ticking = false;
 
   // Target specific sections for dark mode
@@ -759,21 +764,19 @@ function initDarkModeTransitions() {
 
   function updateSectionThemes() {
     const windowHeight = window.innerHeight;
-    const isMobile = window.innerWidth <= 768;
 
     sections.forEach((section) => {
       const sectionId = section.id;
       const rect = section.getBoundingClientRect();
       const sectionTop = rect.top;
-      const sectionBottom = rect.bottom;
       const sectionHeight = rect.height;
       
       if (darkModeSections.includes(sectionId)) {
-        // Slower fade in, hold dark longer, slower fade out
-        const enterStart = isMobile ? windowHeight * 0.85 : windowHeight * 0.8;
-        const enterEnd = isMobile ? windowHeight * 0.4 : windowHeight * 0.45;
-        const exitStart = isMobile ? -sectionHeight * 0.6 : -sectionHeight * 0.65;
-        const exitEnd = isMobile ? -sectionHeight * 0.85 : -sectionHeight * 0.9;
+        // Simplified calculations for better mobile performance
+        const enterStart = windowHeight * 0.8;
+        const enterEnd = windowHeight * 0.45;
+        const exitStart = -sectionHeight * 0.65;
+        const exitEnd = -sectionHeight * 0.9;
         
         // Entering: slower fade in as section enters from bottom
         const enterProgress = 1 - Math.max(0, Math.min(1, (sectionTop - enterEnd) / (enterStart - enterEnd)));
