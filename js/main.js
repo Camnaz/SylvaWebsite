@@ -675,7 +675,13 @@ function initOrbParallax() {
  */
 function initScrollEffects() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  const isMobile = window.innerWidth <= 768;
+  
+  // Disable scroll-based effects on mobile to prevent scroll locking
+  if (prefersReducedMotion || isMobile) {
+    initLifecyclePanel();
+    return;
+  }
 
   initDarkModeTransitions();
   initHighlightEffects();
@@ -870,6 +876,11 @@ function initHighlightEffects() {
   const sections = document.querySelectorAll('.section');
   const isMobile = window.innerWidth <= 768;
   
+  // Disable all animations on mobile to prevent scroll locking
+  if (isMobile) {
+    return;
+  }
+  
   sections.forEach(section => {
     const cards = section.querySelectorAll('.feature-card, .difference-item, .economy-feature, .pillar');
     const highlights = section.querySelectorAll('.highlight');
@@ -890,8 +901,7 @@ function initHighlightEffects() {
           const cards = Array.from(card.parentElement.querySelectorAll('.feature-card, .difference-item, .economy-feature, .pillar'));
           const index = cards.indexOf(card);
           
-          // Reduce stagger delay on mobile for smoother experience
-          const delay = isMobile ? index * 0.05 : index * 0.1;
+          const delay = index * 0.1;
           
           setTimeout(() => {
             card.style.transition = 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -908,8 +918,8 @@ function initHighlightEffects() {
         }
       });
     }, {
-      threshold: isMobile ? 0.05 : 0.15,
-      rootMargin: isMobile ? '0px 0px -40px 0px' : '0px 0px -80px 0px'
+      threshold: 0.15,
+      rootMargin: '0px 0px -80px 0px'
     });
     
     cards.forEach(card => cardObserver.observe(card));

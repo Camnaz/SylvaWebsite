@@ -129,7 +129,8 @@ html {
 @media (max-width: 768px) {
     html {
         scroll-behavior: auto;
-        overscroll-behavior: none;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
     }
 }
 
@@ -147,8 +148,24 @@ body {
     width: 100%;
     position: relative;
     -webkit-overflow-scrolling: touch;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+    body {
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure all content allows vertical scrolling */
+    main, .section, .container, .header {
+        touch-action: pan-y;
+    }
+    
+    /* Prevent any transforms that could cause scroll locking */
+    .section, .pillar, .feature-card, .difference-item, .economy-feature {
+        transform: none !important;
+        will-change: auto !important;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -271,9 +288,14 @@ button, input, textarea, select {
     justify-content: center;
     width: 100%;
     overflow-x: hidden;
-    /* Optimize rendering for smooth scrolling */
-    contain: layout style paint;
-    content-visibility: auto;
+}
+
+/* Only use containment on desktop - can cause scroll issues on mobile */
+@media (min-width: 769px) {
+    .section {
+        contain: layout style paint;
+        content-visibility: auto;
+    }
 }
 
 @media (min-width: 480px) {
