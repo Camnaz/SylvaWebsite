@@ -1,0 +1,588 @@
+/**
+ * Sylva Documentation Theme
+ * Professional theme with proper light and dark mode support
+ */
+
+/* ============================================
+   LIGHT MODE (Default)
+   ============================================ */
+:root {
+  /* Fonts - Match main site */
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --vp-font-family-mono: 'SFMono', 'Roboto Mono', Menlo, monospace;
+
+  /* Primary Colors - Light mode */
+  --vp-c-brand-1: #2a4b3e;
+  --vp-c-brand-2: #3a7d5a;
+  --vp-c-brand-3: #4a9d6f;
+  --vp-c-brand-soft: rgba(42, 75, 62, 0.14);
+
+  /* Background - Light theme */
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f8faf9;
+  --vp-c-bg-mute: #f0f3f1;
+  --vp-c-bg-alt: #fafbfa;
+
+  /* Borders - Light theme */
+  --vp-c-border: #e0e5e2;
+  --vp-c-divider: #d0d8d4;
+  --vp-c-gutter: #e8ebe9;
+
+  /* Text - Light mode (dark text on light bg) */
+  --vp-c-text-1: #1a1f1c;
+  --vp-c-text-2: #4a524e;
+  --vp-c-text-3: #6a7470;
+
+  /* Accent colors - Light mode */
+  --vp-c-green-1: #2a4b3e;
+  --vp-c-green-2: #3a7d5a;
+  --vp-c-green-3: #4a9d6f;
+  --vp-c-green-soft: rgba(42, 75, 62, 0.14);
+
+  --vp-c-yellow-1: #8b6914;
+  --vp-c-yellow-2: #a67c1a;
+  --vp-c-yellow-soft: rgba(139, 105, 20, 0.14);
+
+  --vp-c-red-1: #b91c1c;
+  --vp-c-red-2: #dc2626;
+  --vp-c-red-soft: rgba(185, 28, 28, 0.14);
+
+  /* Code blocks - Light mode */
+  --vp-code-block-bg: #f5f7f6;
+  --vp-code-bg: rgba(42, 75, 62, 0.1);
+  --vp-code-color: #1d4530;
+  
+  /* Syntax highlighting - Light mode */
+  --vp-code-line-highlight-color: rgba(42, 75, 62, 0.08);
+  --vp-code-line-number-color: #6a7470;
+  --vp-code-copy-code-bg: rgba(42, 75, 62, 0.1);
+  --vp-code-copy-code-hover-bg: rgba(42, 75, 62, 0.15);
+
+  /* Custom properties */
+  --vp-c-brand: var(--vp-c-brand-1);
+  --vp-c-brand-light: var(--vp-c-brand-2);
+  --vp-c-brand-lighter: var(--vp-c-brand-3);
+  --vp-c-brand-dark: #1d4530;
+  --vp-c-brand-darker: #153424;
+
+  /* Shadows - Light mode */
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --vp-shadow-2: 0 3px 12px rgba(0, 0, 0, 0.07);
+  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1);
+  --vp-shadow-4: 0 14px 44px rgba(0, 0, 0, 0.12);
+  --vp-shadow-5: 0 18px 56px rgba(0, 0, 0, 0.16);
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+.dark {
+  /* Primary Colors - Dark mode (brighter for contrast) */
+  --vp-c-brand-1: #5fb88a;
+  --vp-c-brand-2: #4a9d6f;
+  --vp-c-brand-3: #3a7d5a;
+  --vp-c-brand-soft: rgba(95, 184, 138, 0.14);
+
+  /* Background - Dark theme */
+  --vp-c-bg: #0f1411;
+  --vp-c-bg-soft: #161b18;
+  --vp-c-bg-mute: #1d2420;
+  --vp-c-bg-alt: #131815;
+
+  /* Borders - Dark theme */
+  --vp-c-border: #2a3530;
+  --vp-c-divider: #354239;
+  --vp-c-gutter: #232b27;
+
+  /* Text - Dark mode (light text on dark bg) */
+  --vp-c-text-1: #f0f5f2;
+  --vp-c-text-2: #d4dfd8;
+  --vp-c-text-3: #9db3a5;
+
+  /* Accent colors - Dark mode */
+  --vp-c-green-1: #6bc99b;
+  --vp-c-green-2: #5fb88a;
+  --vp-c-green-3: #4a9d6f;
+  --vp-c-green-soft: rgba(107, 201, 155, 0.14);
+
+  --vp-c-yellow-1: #f5c563;
+  --vp-c-yellow-2: #e6b84f;
+  --vp-c-yellow-soft: rgba(245, 197, 99, 0.14);
+
+  --vp-c-red-1: #f87171;
+  --vp-c-red-2: #ef4444;
+  --vp-c-red-soft: rgba(248, 113, 113, 0.14);
+
+  /* Code blocks - Dark mode */
+  --vp-code-block-bg: #0d1410;
+  --vp-code-bg: rgba(95, 184, 138, 0.18);
+  --vp-code-color: #7dd4a8;
+  
+  /* Syntax highlighting - Dark mode */
+  --vp-code-line-highlight-color: rgba(95, 184, 138, 0.12);
+  --vp-code-line-number-color: #9db3a5;
+  --vp-code-copy-code-bg: rgba(95, 184, 138, 0.15);
+  --vp-code-copy-code-hover-bg: rgba(95, 184, 138, 0.25);
+
+  /* Custom properties - Dark mode */
+  --vp-c-brand-dark: #25573d;
+  --vp-c-brand-darker: #1d4530;
+
+  /* Shadows - Dark mode */
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.16);
+  --vp-shadow-2: 0 3px 12px rgba(0, 0, 0, 0.24);
+  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.32);
+  --vp-shadow-4: 0 14px 44px rgba(0, 0, 0, 0.4);
+  --vp-shadow-5: 0 18px 56px rgba(0, 0, 0, 0.48);
+}
+
+/* Custom navbar styling */
+.VPNav {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--vp-c-border);
+}
+
+.dark .VPNav {
+  background-color: rgba(15, 20, 17, 0.95) !important;
+}
+
+.VPNavBar {
+  background-color: transparent !important;
+}
+
+/* Logo and title */
+.VPNavBarTitle .title {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* Navigation links */
+.VPNavBarMenuLink,
+.VPLink {
+  transition: all 0.2s ease;
+}
+
+.VPNavBarMenuLink:hover,
+.VPLink:hover {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Sidebar */
+.VPSidebar {
+  background-color: var(--vp-c-bg-soft);
+  border-right: 1px solid var(--vp-c-border);
+}
+
+.VPSidebarItem.is-active > .item > .link {
+  color: var(--vp-c-brand-1);
+  background-color: rgba(58, 125, 90, 0.12);
+  border-left: 3px solid var(--vp-c-brand-1);
+  padding-left: 12px;
+  margin-left: -3px;
+}
+
+/* Hero section */
+.VPHero {
+  background: radial-gradient(ellipse at top, rgba(42, 75, 62, 0.04), transparent 60%);
+}
+
+.VPHero .name {
+  background: linear-gradient(135deg, #2a4b3e 0%, #3a7d5a 50%, #4a9d6f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .VPHero {
+  background: radial-gradient(ellipse at top, rgba(95, 184, 138, 0.06), transparent 60%);
+}
+
+.dark .VPHero .name {
+  background: linear-gradient(135deg, #6bc99b 0%, #5fb88a 50%, #4a9d6f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.VPHero .text {
+  color: var(--vp-c-text-1);
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+}
+
+/* Buttons */
+.VPButton.brand {
+  background-color: var(--vp-c-brand-1);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.VPButton.brand:hover {
+  background-color: var(--vp-c-brand-2);
+  transform: translateY(-1px);
+}
+
+.VPButton.alt {
+  background-color: transparent;
+  border: 1px solid var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  transition: all 0.2s ease;
+}
+
+.VPButton.alt:hover {
+  background-color: rgba(58, 125, 90, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Feature cards */
+.VPFeature {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  transition: all 0.2s ease;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+}
+
+.VPFeature .icon {
+  font-size: 2rem;
+}
+
+/* Code blocks */
+div[class*='language-'] {
+  background-color: var(--vp-code-block-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+}
+
+div[class*='language-'] code {
+  color: var(--vp-c-text-1);
+}
+
+/* Inline code */
+.vp-doc code {
+  background-color: var(--vp-code-bg);
+  color: var(--vp-code-color);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* Inline code in headings */
+.vp-doc h1 code,
+.vp-doc h2 code,
+.vp-doc h3 code,
+.vp-doc h4 code {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+/* Code block syntax highlighting improvements */
+div[class*='language-'] .line {
+  color: var(--vp-c-text-1);
+}
+
+/* Ensure good contrast for common syntax elements */
+div[class*='language-'] .token.comment {
+  color: var(--vp-c-text-3);
+  font-style: italic;
+}
+
+div[class*='language-'] .token.string {
+  color: var(--vp-c-green-1);
+}
+
+div[class*='language-'] .token.keyword,
+div[class*='language-'] .token.operator {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+div[class*='language-'] .token.function {
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+}
+
+div[class*='language-'] .token.number,
+div[class*='language-'] .token.boolean {
+  color: var(--vp-c-text-2);
+}
+
+div[class*='language-'] .token.property,
+div[class*='language-'] .token.tag {
+  color: var(--vp-c-text-1);
+}
+
+div[class*='language-'] .token.punctuation {
+  color: var(--vp-c-text-2);
+}
+
+/* Dark mode syntax overrides for better contrast */
+.dark div[class*='language-'] .token.string {
+  color: #7dd4a8;
+}
+
+.dark div[class*='language-'] .token.keyword,
+.dark div[class*='language-'] .token.operator {
+  color: #5fb88a;
+  font-weight: 600;
+}
+
+.dark div[class*='language-'] .token.comment {
+  color: #8a9d8f;
+}
+
+.dark div[class*='language-'] .token.number,
+.dark div[class*='language-'] .token.boolean {
+  color: #c5d1c8;
+}
+
+/* Links */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+/* Headings */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+  border-bottom-color: var(--vp-c-border);
+}
+
+/* Custom containers (tip, warning, etc.) */
+.vp-doc .custom-block {
+  border-left-width: 3px;
+}
+
+.vp-doc .tip {
+  border-color: var(--vp-c-brand-1);
+  background-color: rgba(42, 75, 62, 0.06);
+}
+
+.vp-doc .warning {
+  border-color: var(--vp-c-yellow-1);
+  background-color: rgba(139, 105, 20, 0.06);
+}
+
+.vp-doc .danger {
+  border-color: var(--vp-c-red-1);
+  background-color: rgba(185, 28, 28, 0.06);
+}
+
+.dark .vp-doc .tip {
+  background-color: rgba(95, 184, 138, 0.08);
+}
+
+.dark .vp-doc .warning {
+  background-color: rgba(245, 197, 99, 0.08);
+}
+
+.dark .vp-doc .danger {
+  background-color: rgba(248, 113, 113, 0.08);
+}
+
+/* Search box */
+.DocSearch-Button {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+}
+
+.DocSearch-Button:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+/* Footer */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-border);
+  background-color: var(--vp-c-bg-alt);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(42, 75, 62, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 75, 62, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(95, 184, 138, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(95, 184, 138, 0.6);
+}
+
+/* Table styling */
+.vp-doc table {
+  border-color: var(--vp-c-border);
+}
+
+.vp-doc th {
+  background-color: rgba(42, 75, 62, 0.08);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.vp-doc tr:hover {
+  background-color: rgba(42, 75, 62, 0.04);
+}
+
+.dark .vp-doc th {
+  background-color: rgba(95, 184, 138, 0.12);
+}
+
+.dark .vp-doc tr:hover {
+  background-color: rgba(95, 184, 138, 0.06);
+}
+
+/* Badge styling */
+.VPBadge {
+  border: 1px solid var(--vp-c-brand-1);
+  background-color: rgba(42, 75, 62, 0.08);
+  color: var(--vp-c-brand-1);
+}
+
+.dark .VPBadge {
+  background-color: rgba(95, 184, 138, 0.12);
+}
+
+/* Mobile and tablet responsive navigation */
+@media (max-width: 1280px) {
+  /* Ensure hamburger menu is always visible on smaller screens */
+  .VPNavBarHamburger {
+    display: block;
+  }
+}
+
+@media (max-width: 960px) {
+  /* Mobile navigation screen styling */
+  .VPNavScreen {
+    background-color: var(--vp-c-bg);
+  }
+  
+  .dark .VPNavScreen {
+    background-color: var(--vp-c-bg);
+  }
+  
+  /* Ensure proper touch targets for mobile */
+  .VPNavScreenMenuLink,
+  .VPNavScreenMenuGroupLink {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .VPSidebarItem .link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Specific fixes for larger mobile devices (iPhone 14 Pro Max, etc) */
+@media (min-width: 768px) and (max-width: 960px) {
+  .VPNavBarHamburger {
+    display: block;
+  }
+  
+  .VPNavBarMenu {
+    display: none;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 640px) {
+  .VPNavScreen {
+    padding: 0 24px;
+  }
+  
+  .VPNavScreenMenuLink,
+  .VPSidebarItem .link {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+}
+
+/* Hide the navbar hamburger on mobile - local nav provides the menu button */
+@media (max-width: 960px) {
+  .VPNavBarHamburger {
+    display: none !important;
+  }
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(42, 75, 62, 0.25);
+  color: var(--vp-c-text-1);
+}
+
+.dark ::selection {
+  background-color: rgba(95, 184, 138, 0.3);
+}
+
+/* Code copy button */
+div[class*='language-'] .copy {
+  background-color: var(--vp-code-copy-code-bg);
+  color: var(--vp-c-text-2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+div[class*='language-'] .copy:hover {
+  background-color: var(--vp-code-copy-code-hover-bg);
+  color: var(--vp-c-text-1);
+}
+
+/* Line numbers */
+div[class*='language-'].line-numbers-mode .line-numbers {
+  color: var(--vp-code-line-number-color);
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+/* Highlighted lines in code blocks */
+div[class*='language-'] .line.highlighted {
+  background-color: var(--vp-code-line-highlight-color);
+  border-left: 3px solid var(--vp-c-brand-1);
+  padding-left: 1em;
+  margin-left: -1em;
+}
+
+/* Code block title/language label */
+div[class*='language-']::before {
+  color: var(--vp-c-text-3);
+  font-weight: 600;
+  font-size: 0.75em;
+}
+
+.dark div[class*='language-']::before {
+  color: var(--vp-c-text-2);
+}
