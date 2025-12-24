@@ -416,6 +416,7 @@ function initWaitlistForm(form) {
  */
 function initScrollAnimations() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth <= 768;
 
   // Intersection Observer for scroll animations
   const observerOptions = {
@@ -447,21 +448,15 @@ function initScrollAnimations() {
     }
   });
   
-  // Navbar scroll effect with smooth mobile transitions
+  // Navbar scroll effect - use CSS-only on mobile for better performance
   const navbar = document.querySelector('.navbar');
-  if (navbar) {
+  if (navbar && !isMobile) {
     let scrollTimeout;
     let lastScrollY = 0;
-    const isMobile = () => window.innerWidth <= 768;
     
     function updateNavbar() {
       const currentScroll = window.pageYOffset;
-      const scrollThreshold = isMobile() ? 20 : 8;
-      
-      // Add smooth transition on mobile
-      if (isMobile() && Math.abs(currentScroll - lastScrollY) > 5) {
-        navbar.style.transition = 'padding 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease, border-color 0.5s ease';
-      }
+      const scrollThreshold = 8;
       
       navbar.classList.toggle('scrolled', currentScroll > scrollThreshold);
       lastScrollY = currentScroll;
@@ -473,6 +468,21 @@ function initScrollAnimations() {
       }
       scrollTimeout = requestAnimationFrame(updateNavbar);
     }, { passive: true });
+  } else if (navbar && isMobile) {
+    // Use CSS-only approach on mobile via intersection observer
+    const sentinelTop = document.createElement('div');
+    sentinelTop.style.position = 'absolute';
+    sentinelTop.style.top = '0';
+    sentinelTop.style.height = '20px';
+    sentinelTop.style.width = '100%';
+    sentinelTop.style.pointerEvents = 'none';
+    document.body.insertBefore(sentinelTop, document.body.firstChild);
+    
+    const sentinelObserver = new IntersectionObserver(([entry]) => {
+      navbar.classList.toggle('scrolled', !entry.isIntersecting);
+    }, { threshold: [1] });
+    
+    sentinelObserver.observe(sentinelTop);
   }
 }
 
@@ -502,35 +512,72 @@ function handleDocumentationLinks() {
 function initSectionHighlighting() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
+  const isMobile = window.innerWidth <= 768;
   
   if (sections.length === 0 || navLinks.length === 0) return;
   
-  function highlightNavigation() {
-    let current = '';
+  // On mobile, use Intersection Observer instead of scroll events
+  if (isMobile) {
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '-20% 0px -35% 0px'
+    };
     
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+  } else {
+    // Desktop: use throttled scroll event
+    let ticking = false;
+    
+    function highlightNavigation() {
+      let current = '';
       
-      if (window.scrollY >= sectionTop - 200) {
-        current = sectionId;
-      }
-    });
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (window.scrollY >= sectionTop - 200) {
+          current = sectionId;
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+      
+      ticking = false;
+    }
     
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(highlightNavigation);
+        ticking = true;
       }
-    });
+    }
+    
+    // Initial highlight check
+    highlightNavigation();
+    
+    // Add throttled scroll event listener
+    window.addEventListener('scroll', requestTick, { passive: true });
   }
-  
-  // Initial highlight check
-  highlightNavigation();
-  
-  // Add scroll event listener
-  window.addEventListener('scroll', highlightNavigation);
 }
 
 /**
